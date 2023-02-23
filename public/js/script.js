@@ -22,7 +22,7 @@ function findBrightest(array){
     }
 })
 })
-    console.log(absolMagnitude)
+    console.log("brightest: ",absolMagnitude)
 }
 
 

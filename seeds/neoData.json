@@ -1,0 +1,197 @@
+[
+    {
+        "absolute_magnitude_h": 24.66,
+        "close_approach_data": [{
+            "close_approach_date": "2023-05-29",
+            "close_approach_date_full": "2023-May-29 16:07",
+            "epoch_date_close_approach": 1685376420000,
+            "relative_velocity": {
+                "kilometers_per_second": "4.1213681938",
+                "kilometers_per_hour": "14836.9254976327",
+                "miles_per_hour": "9219.0885126818"
+            },
+            "miss_distance": {
+                "astronomical": "0.1060250175",
+                "lunar": "41.2437318075",
+                "kilometers": "15861116.784712725",
+                "miles": "9855640.957876605"
+            },
+            "orbiting_body": "Earth"
+        }],
+        "estimated_diameter": {
+            "kilometers": {
+                "estimated_diameter_min": 0.0310852938,
+                "estimated_diameter_max": 0.0695088301
+            },
+            "meters": {
+                "estimated_diameter_min": 31.0852938133,
+                "estimated_diameter_max": 69.5088300671
+            },
+            "miles": {
+                "estimated_diameter_min": 0.0193155001,
+                "estimated_diameter_max": 0.0431907712
+            },
+            "feet": {
+                "estimated_diameter_min": 101.9858753545,
+                "estimated_diameter_max": 228.0473500374
+            }
+        },
+        "id": "54338670",
+        "is_potentially_hazardous_asteroid": false,
+        "is_sentry_object": false,
+        "links": {
+            "self": "http://api.nasa.gov/neo/rest/v1/neo/54338670?api_key=sFL0Yt0KzZft79bJZ8wpDcy2Wr8t27v6TggLHaIz"
+        },
+        "name": "(2023 AJ)",
+        "nasa_jpl_url": "http://ssd.jpl.nasa.gov/sbdb.cgi?sstr=54338670",
+        "neo_reference_id": "54338670"
+    },
+    {
+        "absolute_magnitude_h": 25.6,
+        "close_approach_data": [
+            {
+                "close_approach_date": "2023-05-26",
+                "close_approach_date_full": "2023-May-26 15:49",
+                "epoch_date_close_approach": 1685116140000,
+                "relative_velocity": {
+                    "kilometers_per_second": "9.155075114",
+                    "kilometers_per_hour": "32958.2704103769",
+                    "miles_per_hour": "20478.9875224923"
+                },
+                "miss_distance": {
+                    "astronomical": "0.1813247313",
+                    "lunar": "70.5353204757",
+                    "kilometers": "27125793.580802331",
+                    "miles": "16855186.5457249278"
+                },
+                "orbiting_body": "Earth"
+            }
+        ],
+        "estimated_diameter": {
+            "kilometers": {
+            "estimated_diameter_min": 0.0201629919,
+            "estimated_diameter_max": 0.0450858206
+        },
+        "meters": {
+            "estimated_diameter_min": 20.1629919443,
+            "estimated_diameter_max": 45.0858206172
+        },
+        "miles": {
+            "estimated_diameter_min": 0.0125286985,
+            "estimated_diameter_max": 0.0280150214
+        },
+        "feet": {
+            "estimated_diameter_min": 66.1515504905,
+            "estimated_diameter_max": 147.9193637137
+        }
+    },
+        "id": "2478784",
+        "is_potentially_hazardous_asteroid": false,
+        "is_sentry_object": false,
+        "links": {
+            "self": "http://api.nasa.gov/neo/rest/v1/neo/2478784?api_key=sFL0Yt0KzZft79bJZ8wpDcy2Wr8t27v6TggLHaIz"
+        },
+        "name": "478784 (2012 UV136)",
+        "nasa_jpl_url": "http://ssd.jpl.nasa.gov/sbdb.cgi?sstr=2478784",
+        "neo_reference_id": "2478784"
+    },
+    {
+        "absolute_magnitude_h": 16.11,
+        "close_approach_data": [
+            {
+                "close_approach_date": "2023-05-30",
+                "close_approach_date_full": "2023-May-30 10:16",
+                "epoch_date_close_approach": 1685441760000,
+                "relative_velocity": {
+                    "kilometers_per_second": "11.4187999078",
+                    "kilometers_per_hour": "41107.6796681099",
+                    "miles_per_hour": "25542.7135137764"
+                },
+                "miss_distance": {
+                    "astronomical": "0.2128175691",
+                    "lunar": "82.7860343799",
+                    "kilometers": "31837055.035937817",
+                    "miles": "19782628.6666511946"
+                },
+                "orbiting_body": "Earth"
+            }
+        ],
+        "estimated_diameter": {
+            "kilometers": {
+                "estimated_diameter_min": 1.5942446807,
+                "estimated_diameter_max": 3.5648394788
+            },
+            "meters": {
+                "estimated_diameter_min": 1594.2446806871,
+                "estimated_diameter_max": 3564.8394787839
+            },
+            "miles": {
+                "estimated_diameter_min": 0.9906174115,
+                "estimated_diameter_max": 2.2150878718
+            },
+            "feet": {
+                "estimated_diameter_min": 5230.4617181856,
+                "estimated_diameter_max": 11695.6679555734
+            }
+        },
+        "id": "2001862",
+        "is_potentially_hazardous_asteroid": true,
+        "is_sentry_object": false,
+        "links": {
+            "self": "http://api.nasa.gov/neo/rest/v1/neo/2001862?api_key=sFL0Yt0KzZft79bJZ8wpDcy2Wr8t27v6TggLHaIz"
+        },
+        "name": "1862 Apollo (1932 HA)",
+        "nasa_jpl_url": "http://ssd.jpl.nasa.gov/sbdb.cgi?sstr=2001862",
+        "neo_reference_id": "2001862"
+    },
+    {
+        "absolute_magnitude_h": 18.9,
+        "close_approach_data": [
+            {
+                "close_approach_date": "2023-05-28",
+                "close_approach_date_full": "2023-May-28 04:55",
+                "epoch_date_close_approach": 1685249700000,
+                "relative_velocity":{
+                    "kilometers_per_second": "30.4503471222",
+                    "kilometers_per_hour": "109621.2496399373",
+
+                    "miles_per_hour": "68114.3814776599"
+                },
+                "miss_distance":{
+                    "astronomical": 0.3261572893,
+                    "lunar": 126.8751855377,
+                    "kilometers": 48792435.764253791,
+                    "miles": 30318213.7096566758
+                },
+                "orbiting_body": "Earth"
+            }
+        ],
+        "estimated_diameter": {
+            "kilometers": {
+                "estimated_diameter_min": 0.4411182,
+                "estimated_diameter_max": 0.9863702813
+            },
+            "meters": {
+                "estimated_diameter_min": 441.1181999969,
+                "estimated_diameter_max": 986.3702813054
+            },
+            "miles": {
+                "estimated_diameter_min": 0.2740980571,
+                "estimated_diameter_max": 0.6129018881
+            },
+            "feet": {
+                "estimated_diameter_min": 1447.2382352778,
+                "estimated_diameter_max": 3236.1230737181
+            }
+        },
+        "id": "3824084",
+        "is_potentially_hazardous_asteroid": true,
+        "is_sentry_object": false,
+        "links": {
+            "self": "http://api.nasa.gov/neo/rest/v1/neo/3824084?api_key=sFL0Yt0KzZft79bJZ8wpDcy2Wr8t27v6TggLHaIz"
+        },
+        "name": "(2018 JD2)",
+        "nasa_jpl_url": "http://ssd.jpl.nasa.gov/sbdb.cgi?sstr=3824084",
+        "neo_reference_id": "3824084"
+    }
+]
