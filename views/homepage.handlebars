@@ -1,0 +1,32 @@
+<div class="container m-2 col-4">
+    <h2>Find NEOs</h2>
+    <div class='container col-auto' id="search-input">
+    <input class="form-control form-control-sm col-3" type="number" id="year" placeholder="Year YYYY" aria-label="Year Input" >
+    <input class="form-control form-control-sm col-3" type="number" placeholder="Month MM" aria-label="Month Input" id="month" min="1" max="12">
+    <input class="form-control form-control-sm col-3" type="number" placeholder="Day DD" aria-label="Day Input" id="day" min="1" max="31">
+    <input class="form-control form-control-sm col-3" type="number" placeholder="# of Days (max 7)" aria-label="Number of Days Input" id="day-span" max="7">
+
+    <button type="button" class="btn btn-success" id="search">Search</button>
+    </div>  
+</div>
+
+
+<main>
+	{{#each gamesData}}
+		<div class="card lg:card-side shadow-xl">
+			<figure><img src="https://images.igdb.com/igdb/image/upload/t_cover_small_2x/{{this.dataValues.cover}}.jpg"
+					alt="Album"
+				/></figure>
+			<div class="card-body">
+				<h2 class="card-title text-3xl" id="name">{{this.dataValues.name}}</h2>
+				<p>ID: <span id="game_id">{{this.dataValues.id}}</span></p>
+				<p class="text-xl">Genres: {{this.dataValues.genres}}</p>
+				<div class="card-actions justify-end" id="button-holder">
+					<a class="btn btn-accent" href="/{{this.dataValues.id}}">Open</a>
+					<button class="btn btn-primary" id="{{this.dataValues.id}}">ADD</button>
+				</div>
+			</div>
+		</div>
+		<br />
+	{{/each}}
+</main>
