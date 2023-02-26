@@ -1,16 +1,16 @@
 const router = require('express').Router();
 const path = require('path');
 
-const neoRoutes = require('./NEO-routes/neoRoutes');
-const userRoutes = require('./User-routes/userRoutes');
+const apiRoutes = require('./api');
 
 router.get('/', async(req, res) => {
     console.log("Hello!")
-    res.sendFile(path.join(__dirname, '../views/index.html'));
+    res.render("homepage", {
+        loggedin: true,
+    })
 });
 
-router.use('/user', userRoutes);
-router.use('/neo', neoRoutes);
+router.use('/api', apiRoutes);
 
 
 module.exports = router;

@@ -2,8 +2,17 @@ console.log('hello world')
 const baseURL = 'https://api.nasa.gov/neo/rest/v1/'
 const apiKEY = 'sFL0Yt0KzZft79bJZ8wpDcy2Wr8t27v6TggLHaIz'
 const searchBtn = document.getElementById('search')
-const start_date = `2023-05-26`;
-const end_date = `2023-05-31`;
+const yearInput = document.getElementById("year");
+const monthInput = document.getElementById('month');
+const dayInput = document.getElementById('day');
+const spanInput = document.getElementById('day-span');
+
+const year = yearInput.value
+
+
+
+// const start_date =`2023-05-15`
+// const end_date = `2023-05-20`
 
 let PHA = [];
 let nearestObj = [];
@@ -79,8 +88,29 @@ function deconstruct(data){
     findBrightest(days);
 }
 
-function searchNeoByDate(start_date, end_date){
+function searchNeoByDate(){
+    const start = {
+        year: yearInput.value,
+        month: monthInput.value,
+        day: dayInput.value
+    };
+    const end = {
+        year: yearInput.value,
+        month: monthInput.value,
+        span: spanInput.value
+    };
+    let end_span = parseInt(end.span, 10)
+    let start_day = parseInt(start.day,10)
+    let end_day = end_span+start_day-1
 
+    let date = new Date(start.year, start.month, start.day)
+
+    const start_date = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
+
+    date.setDate(end_day)
+    
+    const end_date = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
+    
     var dateQueryURL = `feed?start_date=${start_date}&end_date=${end_date}&api_key=${apiKEY}`
     fetch(baseURL+dateQueryURL)
     .then(function(response){
@@ -93,6 +123,9 @@ function searchNeoByDate(start_date, end_date){
 
 searchBtn.addEventListener('click', function(event){
     event.preventDefault();
-    searchNeoByDate(start_date,end_date);
+    searchNeoByDate();
 })
 
+
+
+// new Date(end.year, end.month, end_day).toLocaleDateString('en-us', {year:"numeric", month: "numeric", day: "numeric"})
