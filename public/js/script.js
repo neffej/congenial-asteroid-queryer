@@ -7,7 +7,8 @@ const monthInput = document.getElementById('month');
 const dayInput = document.getElementById('day');
 const spanInput = document.getElementById('day-span');
 
-const year = yearInput.value
+const searchEl = document.getElementById('search_bar');
+const resultsEl = document.getElementById('search_results');
 
 
 
@@ -18,7 +19,80 @@ let PHA = [];
 let nearestObj = [];
 let largestObj = [];
 let absolMagnitude = [];
-let days = []
+let days = [];
+
+let neosData = [];
+
+function populateTables(array){
+    array.forEach(element => {
+        element.forEach(item =>{
+
+    // Define item
+    let result = {Name: item.name, 
+        JPL_ID: item.id,
+        Date: item.close_approach_data[0].close_approach_date, 
+        Approach: item.close_approach_data[0].miss_distance.miles,
+        Diameter: item.estimated_diameter.feet.estimated_diameter_max,
+        Brightness: item.absolute_magnitude_h,
+        Danger: item.is_potentially_hazardous_asteroid,
+        Link: item.links.self}
+
+        console.log(result.Danger);
+
+
+    // Make Results row
+    let row = document.createElement('tr');
+    row.classList.add("table-primary");
+    resultsEl.appendChild(row);
+
+    // Make header element
+    let header = document.createElement('th');
+    let scope = document.createAttribute('scope');
+    // scope.value = "row";
+    header.setAttribute("scope", "row");
+    header.textContent = result.Name;
+
+    row.appendChild(header);
+
+    // Make NEO data elements
+        let id = document.createElement('td');
+        id.id = "JPL ID";
+        id.textContent = result.JPL_ID;
+        row.appendChild(id);
+
+        let date = document.createElement('td');
+        date.id = "approach_date";
+        date.textContent = result.Date;
+        row.appendChild(date);
+
+        let distance = document.createElement('td');
+        distance.id = "distance";
+        distance.textContent = result.Approach;
+        row.appendChild(distance);
+
+        let diameter = document.createElement('td');
+        diameter.id = "diameter";
+        diameter.textContent = result.Diameter;
+        row.appendChild(diameter);
+
+        let magnitude = document.createElement('td');
+        magnitude.id = "magnitude";
+        magnitude.textContent = result.Brightness;
+        row.appendChild(magnitude);
+
+        let pha = document.createElement('td');
+        pha.id = "PHA";
+        pha.textContent = result.Danger
+        row.appendChild(pha);
+
+        let link = document.createElement('td');
+        link.id = "link";
+        link.textContent = result.Link;
+        row.appendChild(link);
+    });
+});
+
+}
 
 function findBrightest(array){
     array.forEach(element => {
@@ -33,7 +107,6 @@ function findBrightest(array){
 })
     console.log("brightest: ",absolMagnitude)
 }
-
 
 function findLargest(array){
     array.forEach(element => {
@@ -72,7 +145,7 @@ function parsePHA(array){
             }
         })
     })
-    console.log(PHA);
+    neosData.push(PHA);
 }
 
 function deconstruct(data){
@@ -82,6 +155,7 @@ function deconstruct(data){
     days.push(resultsObj[day]);
 }
     console.log(days);
+    populateTables(days);
     parsePHA(days);
     findNearest(days);
     findLargest(days);
@@ -108,7 +182,7 @@ function searchNeoByDate(){
     const start_date = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
 
     date.setDate(end_day)
-    
+
     const end_date = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
     
     var dateQueryURL = `feed?start_date=${start_date}&end_date=${end_date}&api_key=${apiKEY}`
