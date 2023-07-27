@@ -6,6 +6,7 @@ const apiKEY = 'sFL0Yt0KzZft79bJZ8wpDcy2Wr8t27v6TggLHaIz'
 const searchBtn = document.getElementById('search')
 const clearBtn = document.getElementById('clear');
 clearBtn.style.display = 'none'
+
 const downloadBtn = document.getElementById('download')
 downloadBtn.style.display = 'none'
 const yearInput = document.getElementById("year");
