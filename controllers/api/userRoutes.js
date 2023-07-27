@@ -10,4 +10,20 @@ router.get('/', async(req,res)=> {
     }
 });
 
+router.get('/login', async(req, res) =>{
+    try {
+        res.render("login")
+    } catch (error) {
+        res.status(400).json(err)
+    }
+})
+
+router.get('/register', async(req, res)=>{
+    try {
+        res.render('register')
+    } catch (error) {
+        res.status(400).json(err)
+    }
+})
+
 module.exports = router;

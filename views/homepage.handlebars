@@ -1,101 +1,33 @@
 <div class="m-2 row col-8" id="search_bar">
     <h2>Find NEOs</h2>
     <div class='input-group mb-3' id="search-input">
-    <input class="form-control form-control-sm col-3" type="number" id="year" placeholder="Year YYYY" aria-label="Year Input" >
-    <input class="form-control form-control-sm col-3" type="number" placeholder="Month MM" aria-label="Month Input" id="month" min="1" max="12">
-    <input class="form-control form-control-sm col-3" type="number" placeholder="Day DD" aria-label="Day Input" id="day" min="1" max="31">
-    <input class="form-control form-control-sm col-3" type="number" placeholder="# of Days (max 7)" aria-label="Number of Days Input" id="day-span" max="7">
+    <input class="form-control form-control-sm col-3" type="text" id="year" placeholder="Year YYYY" aria-label="Year Input" >
+    <input class="form-control form-control-sm col-3" type="text" required="required" placeholder="Month MM" aria-label="Month Input" id="month" >
+    <input class="form-control form-control-sm col-3" type="text" placeholder="Day DD" aria-label="Day Input" id="day" >
+    <input class="form-control form-control-sm col-3" type="text" placeholder="# of Days (max 7)" aria-label="Number of Days Input" id="day-span" >
 
     <button type="button" class="btn btn-success" id="search">Search</button>
+    <button type="button" class="btn btn-info" id="download">Download</button>
+    <button type="button" class="btn btn-warning" id="clear">Clear Table</button>
+    
+
     </div>  
 </div>
 
 <table class="table table-hover" >
   <thead>
     <tr>
-      <th scope="col">Name</th>
-      <th scope="col">NEO ID</th>
-      <th scope="col">Close Approach Date</th>
-      <th scope="col">Nearest Approach (miles)</th>
-      <th scope="col">Estimated Diameter (Max, in feet)</th>
-      <th scope="col">Absolute Magnitude</th>
-      <th scope="col">Potentially Hazardous Object?</th>
-      <th scope="col">Link</th>
+      <th scope="col" id="name">Name</th>
+      <th scope="col" id="neo_id">NEO ID</th>
+      <th scope="col" id="date">Close Approach Date</th>
+      <th scope="col" id="distance">Nearest Approach (miles)</th>
+      <th scope="col" id="diameter">Estimated Diameter (Max, in feet)</th>
+      <th scope="col" id="brightness">Absolute Magnitude</th>
+      <th scope="col" id="pha">Potentially Hazardous Object?</th>
+      <th scope="col" id="link">Link</th>
     </tr>
   </thead>
   <tbody id="search_results">
-    {{!-- <tr class="table-primary">
-      <th scope="row">Name</th>
-      <td>NEO ID</th>
-      <td>Close Approach Date</th>
-      <td>Nearest Approach (miles)</th>
-      <td>Estimated Diameter (Max, in feet)</th>
-      <td>Absolute Magnitude</th>
-      <td>Is this thing dangerous?</th>
-      <td>JPL Object Link</td>
-    </tr> --}}
-    {{!-- <tr class="table-secondary">
-      <th scope="row">Name</th>
-      <td>NEO ID</th>
-      <td>Close Approach Date</th>
-      <td>Nearest Approach (miles)</th>
-      <td>Estimated Diameter (Max, in feet)</th>
-      <td>Absolute Magnitude</th>
-      <td>Is this thing dangerous?</th>
-    </tr>
-    <tr class="table-primary">
-      <th scope="row">Name</th>
-      <td>NEO ID</th>
-      <td>Close Approach Date</th>
-      <td>Nearest Approach (miles)</th>
-      <td>Estimated Diameter (Max, in feet)</th>
-      <td>Absolute Magnitude</th>
-      <td>Is this thing dangerous?</th>
-    </tr>
-    <tr class="table-secondary">
-      <th scope="row">Name</th>
-      <td>NEO ID</th>
-      <td>Close Approach Date</th>
-      <td>Nearest Approach (miles)</th>
-      <td>Estimated Diameter (Max, in feet)</th>
-      <td>Absolute Magnitude</th>
-      <td>Is this thing dangerous?</th>
-    </tr>
-    <tr class="table-primary">
-      <th scope="row">Name</th>
-      <td>NEO ID</th>
-      <td>Close Approach Date</th>
-      <td>Nearest Approach (miles)</th>
-      <td>Estimated Diameter (Max, in feet)</th>
-      <td>Absolute Magnitude</th>
-      <td>Is this thing dangerous?</th>
-    </tr>
-    <tr class="table-secondary">
-      <th scope="row">Name</th>
-      <td>NEO ID</th>
-      <td>Close Approach Date</th>
-      <td>Nearest Approach (miles)</th>
-      <td>Estimated Diameter (Max, in feet)</th>
-      <td>Absolute Magnitude</th>
-      <td>Is this thing dangerous?</th>
-    </tr>
-    <tr class="table-primary">
-      <th scope="row">Name</th>
-      <td>NEO ID</th>
-      <td>Close Approach Date</th>
-      <td>Nearest Approach (miles)</th>
-      <td>Estimated Diameter (Max, in feet)</th>
-      <td>Absolute Magnitude</th>
-      <td>Is this thing dangerous?</th>
-    </tr>
-    <tr class="table-secondary">
-      <th scope="row">Name</th>
-      <td>NEO ID</th>
-      <td>Close Approach Date</th>
-      <td>Nearest Approach (miles)</th>
-      <td>Estimated Diameter (Max, in feet)</th>
-      <td>Absolute Magnitude</th>
-      <td>Is this thing dangerous?</th>
-    </tr> --}}
+    
   </tbody>
 </table>
