@@ -26,4 +26,11 @@ router.get('/register', async(req, res)=>{
     }
 })
 
+router.post('/register', async(req,res)=>{
+    try {
+        
+    } catch (error) {
+        res.status(400).json(err)
+    }
+})
 module.exports = router;

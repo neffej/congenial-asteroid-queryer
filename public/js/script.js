@@ -5,10 +5,10 @@ const baseURL = 'https://api.nasa.gov/neo/rest/v1/'
 const apiKEY = 'sFL0Yt0KzZft79bJZ8wpDcy2Wr8t27v6TggLHaIz'
 const searchBtn = document.getElementById('search')
 const clearBtn = document.getElementById('clear');
-clearBtn.style.display = 'none'
+// clearBtn.style.display = 'none'
 
 const downloadBtn = document.getElementById('download')
-downloadBtn.style.display = 'none'
+// downloadBtn.style.display = 'none'
 const yearInput = document.getElementById("year");
 const monthInput = document.getElementById('month');
 const dayInput = document.getElementById('day');
@@ -116,6 +116,7 @@ function removeChildren(element){
 
 function clearTable(){
     days = [];
+    csvData = [];
     removeChildren(resultsEl)
     console.log(days)
 }
@@ -134,10 +135,12 @@ function searchNeoByDate(){
     let end_day = end_span+start_day-1
     date = new Date(start.year, start.month, start.day)
 
-    if(Number(search_date) === Number(date)){
+    if(Number(search_date) === Number(date)&&resultsEl.children.length>0){
         console.log("same date")
+        console.log(resultsEl.children.length)
         return
     }else{
+        console.log(resultsEl.children.length)
         clearTable();
         search_date = date
         
@@ -197,12 +200,16 @@ searchBtn.addEventListener('click', function(event){
 
 downloadBtn.addEventListener('click', function(){
     let array = csvMaker(csvData)
-    download(array, searchEl)
+    download(array, downloadBtn)
 })
 
 clearBtn.addEventListener('click', function(event){
     event.preventDefault();
     clearTable();
+    if(downloadBtn.children.length>0){
+    downloadBtn.removeChild(downloadBtn.firstElementChild)}
+    clearBtn.style.display = 'none'
+    downloadBtn.style.display = 'none'
 })
 
 dateHeader.addEventListener('click', function(){
