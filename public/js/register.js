@@ -15,6 +15,8 @@ function submitForm(){
     fetch("/api/user/register",{
         method: "POST",
         body: JSON.stringify({
+            first_name: fn_input,
+            last_name: ln_input,
             username: username_input,
             email: email_input,
             password: pw_input,
@@ -24,14 +26,14 @@ function submitForm(){
         },
     }).then((res)=>{
         if(res.ok){
-        console.log(res)   
+        document.location.replace("/") 
      }else{
             if (document.querySelector(".bad-login")) {
 				document.querySelector(".bad-login").remove();
 			}
 			const createEl = document.createElement("p");
 			createEl.classList = "bad-login";
-			createEl.innerHTML = "Your username is already taken. Please choose another username";
+			createEl.innerHTML = "Registration rejected. Please check forms and try again.";
 			document.getElementById("signup-form").appendChild(createEl);
         }
     });

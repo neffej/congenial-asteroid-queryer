@@ -36,7 +36,7 @@ router.post('/register', async(req,res)=>{
     console.log("message received")
     console.log(req.body)
     try {
-        let { username, email, password } = req.body
+        let { first_name, last_name, username, email, password } = req.body
         const userExists = await Users.findOne({ where: { email: email } })
 
         if(userExists){
@@ -49,6 +49,8 @@ router.post('/register', async(req,res)=>{
     }
 
     let user = Users.create({
+        first_name: first_name,
+        last_name: last_name,
         username: username,
         email: email,
         password: password
@@ -56,6 +58,8 @@ router.post('/register', async(req,res)=>{
         if(user){
             res.status(201).json({
                 id: user.id,
+                first_name: user.first_name,
+                last_name: user.last_name,
                 username: user.username,
                 email: user.email,
                 password: user.password
