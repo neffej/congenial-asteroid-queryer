@@ -1,6 +1,9 @@
 const router = require('express').Router();
 const Users  = require('../../models/user/Users');
 const sequelize = require('../../config/connection')
+const session = require("express-session")
+const SequelizeStore = require('connect-session-sequelize')(session.Store)
+
 
 //@/api/user/
 router.get('/', async(req,res)=> {
@@ -15,9 +18,10 @@ router.get('/', async(req,res)=> {
 //@/api/user/login
 router.get('/login', async(req, res) =>{
     try {
+        console.log(req.session)
         res.render("login")
     } catch (error) {
-        res.status(400).json(err)
+        res.status(400).json(error)
     }
 })
 
@@ -33,8 +37,6 @@ router.get('/register', async(req, res)=>{
 
 //@/api/user/register
 router.post('/register', async(req,res)=>{
-    console.log("message received")
-    console.log(req.body)
     try {
         let { first_name, last_name, username, email, password } = req.body
         const userExists = await Users.findOne({ where: { email: email } })
@@ -67,6 +69,34 @@ router.post('/register', async(req,res)=>{
         }else{
             res.status(400)
             throw new Error ("Invalid user data")
+        }
+    } catch (error) {
+        res.status(400).json(error)
+    }
+})
+
+router.post('/login', async(req,res)=>{
+    console.log("message received")
+    console.log(req.body)
+    try {
+        let { username, password } = req.body
+        const userExists = await Users.findOne({ where: { username: username } })
+
+        if(userExists){
+            console.log("user exists")
+            const validatePw = userExists.checkPassword(password)
+            if(validatePw == false){
+                res.status(400).json({ message: "Invalid Password"});
+                return;
+            }else{
+                console.log("correct pw")
+            req.session.loggedIn = true
+            req.session.user_id = userExists.id
+            console.log(req.session)
+        }
+        }else{
+            res.status(400).json({ message: "Username not found"})
+            return;
         }
     } catch (error) {
         res.status(400).json(error)

@@ -1,18 +1,35 @@
 const express = require('express');
+const session = require("express-session")
 const path = require('path');
-var _ = require('lodash/core') 
 const sequelize = require('./config/connection')
+const SequelizeStore = require('connect-session-sequelize')(session.Store)
 const app = express();
 const PORT = process.env.PORT || 3001;
 const exphbs = require('express-handlebars');
 const routes = require('./controllers/index');
-const bodyParser = require('body-parser')
 // const models = require('./models');
 
 const hbs = exphbs.create({});
 
 app.engine("handlebars", hbs.engine);
 app.set('view engine', 'handlebars');
+
+const sess = {
+	secret: process.env.SESSION_SECRET,
+	cookie: {
+		maxAge: 60 * 60 * 1000,
+		httpOnly: true,
+		secure: false,
+		sameSite: "strict",
+	},
+	resave: false,
+	saveUninitialized: true,
+	store: new SequelizeStore({
+		db: sequelize,
+	}),
+};
+
+app.use(session(sess))
 
 app.use(express.static(path.join(__dirname, 'public')));
 
