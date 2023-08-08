@@ -93,6 +93,7 @@ router.post('/login', async(req,res)=>{
             req.session.loggedIn = true
             req.session.user_id = userExists.id
             console.log(req.session)
+            res.status(200).json({ message: "Valid Login" })
         }
         }else{
             res.status(400).json({ message: "Username not found"})
@@ -102,4 +103,14 @@ router.post('/login', async(req,res)=>{
         res.status(400).json(error)
     }
 })
+
+router.get("/logout", async (req, res) => {
+	try {
+		req.session.destroy(() => {
+            res.render("homepage")
+		});
+	} catch (err) {
+		res.status(404).end();
+	}
+});
 module.exports = router;

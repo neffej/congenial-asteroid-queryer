@@ -1,6 +1,8 @@
 import { download, csvMaker } from "./downloadCSV.js"
 
+
 console.log('hello world')
+const logoutEl = document.getElementById("logout")
 const baseURL = 'https://api.nasa.gov/neo/rest/v1/'
 const apiKEY = 'sFL0Yt0KzZft79bJZ8wpDcy2Wr8t27v6TggLHaIz'
 const searchBtn = document.getElementById('search')
@@ -28,6 +30,7 @@ let date = null
 let days = [];
 let neosData = [];
 let csvData = [];
+
 
 // Parses data into neosData array. Sends array to populateTables
 function deconstruct(data){

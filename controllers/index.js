@@ -6,7 +6,8 @@ const apiRoutes = require('./api');
 router.get('/', async(req, res) => {
     console.log("Hello!")
     res.render("homepage", {
-        loggedin: true,
+        loggedIn: req.session.loggedIn,
+        userId: req.session.user_id
     })
 });
 
