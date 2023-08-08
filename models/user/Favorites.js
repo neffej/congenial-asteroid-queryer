@@ -10,12 +10,16 @@ Favorites.init(
             autoIncrement: true,
             primaryKey: true,
         },
-        neo_id: {
-            type: DataTypes.STRING,
+        data:{
+            type: DataTypes.JSON,
+            allowNull: false,
+        },
+        neo_id:{
+            type:DataTypes.INTEGER,
             allowNull: false,
             references: {
                 model: "neos",
-                key: "id",
+                key: "id"
             }
         },
         user_id: {
