@@ -6,6 +6,7 @@ const apiKEY = 'sFL0Yt0KzZft79bJZ8wpDcy2Wr8t27v6TggLHaIz'
 const searchBtn = document.getElementById('search')
 const clearBtn = document.getElementById('clear');
 const downloadBtn = document.getElementById('download')
+const saveBtn = document.getElementById('save')
 
 const yearInput = document.getElementById("year");
 const monthInput = document.getElementById('month');
@@ -89,11 +90,11 @@ function deconstruct(data){
         })
     })
     // console.log(days)
-    // console.log(neosData)
+    console.log(neosData)
     populateTables(neosData);
 }
 
-//Populates DOM with array data, typically from deconstructed API response JSON
+//Populates DOM with array data, typically from deconstructed API response JSON.
 function populateTables(array){
     array.forEach(item => {
         let sstr = item.nasa_jpl_url.split("=")[1]
@@ -115,7 +116,13 @@ function populateTables(array){
     let row = document.createElement('tr');
     row.classList.add("table-primary");
     row.id = result.id
+
+    row.insertCell(0).innerHTML=`<input type="checkbox" class="form-check" data-id="${result.id}">`;
+    
     resultsEl.appendChild(row);
+
+    // Create checkbox
+
 
     appendData(result.name, "name",result.id)
     appendData(result.id, "id",result.id)
@@ -229,12 +236,20 @@ function csvSort(){
     })
 }
 
+
+function getChecked(){
+
+        console.log(resultsEl.children)
+
+}
+
 //----------------------Event Listeners---------------------------//
 searchBtn.addEventListener('click', function(event){
     event.preventDefault();
     searchNeoByDate();
     clearBtn.style.display = 'inline'
     downloadBtn.style.display = 'inline'
+    saveBtn.style.display = 'inline'
 })
 
 downloadBtn.addEventListener('click', function(){
@@ -251,7 +266,25 @@ clearBtn.addEventListener('click', function(event){
     downloadBtn.style.display = 'none'
 })
 
+saveBtn.addEventListener('click', function(event){
+    event.preventDefault();
+    // console.log('save')
+
+    const selectedRecordIds = [];
+    const checkboxes = document.querySelectorAll('.form-check:checked');
+  
+    checkboxes.forEach(checkbox => {
+      selectedRecordIds.push(parseInt(checkbox.getAttribute('data-id')));
+    });
+    console.log(selectedRecordIds)
+
+    const filteredNeos = neosData.filter(record => selectedRecordIds.includes(Number(record.id)))
+
+    console.log(filteredNeos)
+})
+
 dateHeader.addEventListener('click', function(){
+    getChecked()
     csvSort()
 })
 

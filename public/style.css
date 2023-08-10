@@ -6,6 +6,9 @@
     display: none;
 }
 
+#save{
+    display: none;
+}
 #avatar{
     height: 25px;
 }

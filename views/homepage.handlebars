@@ -9,6 +9,9 @@
     <button type="button" class="btn btn-success" id="search">Search</button>
     <button type="button" class="btn btn-info" id="download">Download</button>
     <button type="button" class="btn btn-warning" id="clear">Clear Table</button>
+    {{#if loggedIn}}
+    <button type="button" class="btn btn-light" id="save">Save Records</button>
+    {{/if}}
     
 
     </div>  
@@ -17,6 +20,7 @@
 <table class="table table-hover" >
   <thead>
     <tr>
+      <th scope="col" id="check">Select</th>
       <th scope="col" id="name">Name</th>
       <th scope="col" id="neo_id">NEO ID</th>
       <th scope="col" id="date">Close Approach Date</th>
