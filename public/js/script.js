@@ -1,16 +1,16 @@
 import { download, csvMaker } from "./downloadCSV.js"
+import 'dotenv/config'
+import errorReporter from './errorReporter.mjs'
 
+errorReporter.report(new Error('documented example'))
 
 console.log('hello world')
-const logoutEl = document.getElementById("logout")
 const baseURL = 'https://api.nasa.gov/neo/rest/v1/'
-const apiKEY = 'sFL0Yt0KzZft79bJZ8wpDcy2Wr8t27v6TggLHaIz'
+const apiKEY = process.env.API_KEY
 const searchBtn = document.getElementById('search')
 const clearBtn = document.getElementById('clear');
-// clearBtn.style.display = 'none'
-
 const downloadBtn = document.getElementById('download')
-// downloadBtn.style.display = 'none'
+
 const yearInput = document.getElementById("year");
 const monthInput = document.getElementById('month');
 const dayInput = document.getElementById('day');
@@ -25,7 +25,6 @@ const magnitudeHeader = document.getElementById('brightness');
 
 let search_date = 0
 let date = null
-
 
 let days = [];
 let neosData = [];

@@ -5,7 +5,7 @@ const session = require("express-session")
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
 
 
-//@/api/user/
+// @/api/user/
 router.get('/', async(req,res)=> {
     try{
         const neoData = await NEOs.findAll()
@@ -15,7 +15,7 @@ router.get('/', async(req,res)=> {
     }
 });
 
-//@/api/user/login
+// @/api/user/login
 router.get('/login', async(req, res) =>{
     try {
         console.log(req.session)
@@ -26,7 +26,7 @@ router.get('/login', async(req, res) =>{
 })
 
 
-//@/api/user/register
+// @/api/user/register
 router.get('/register', async(req, res)=>{
     try {
         res.render('register')
@@ -35,7 +35,7 @@ router.get('/register', async(req, res)=>{
     }
 })
 
-//@/api/user/register
+// @/api/user/register
 router.post('/register', async(req,res)=>{
     try {
         let { first_name, last_name, username, email, password } = req.body
