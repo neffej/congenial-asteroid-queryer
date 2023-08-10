@@ -58,6 +58,7 @@ router.post('/register', async(req,res)=>{
         password: password
     })
         if(user){
+            req.session.loggedIn = true
             res.status(201).json({
                 id: user.id,
                 first_name: user.first_name,

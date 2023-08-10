@@ -42,7 +42,7 @@ sequelize.authenticate()
 .then(()=> console.log("Database connected..."))
 .catch(err => console.log('Error: '+err))
 
-sequelize.sync({ force: true })
+sequelize.sync({ force: false })
 .then(() => {
     app.listen(PORT, () => console.log(`Now Listening on ${PORT}`));
 });

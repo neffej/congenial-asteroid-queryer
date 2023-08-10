@@ -31,85 +31,40 @@ let days = [];
 let neosData = [];
 let csvData = [];
 
+//-----------------------FUNCTIONS-------------------------------//
+//-----------------------HTML UTILITIES--------------------------//
+//These utilities add and remove elements from the DOM. They are used by the other functions to display API data and to sort and manage the table display.
 
-// Parses data into neosData array. Sends array to populateTables
-function deconstruct(data){
-    neosData = []
-    const nasaObj = { ...data }
-    const resultsObj = nasaObj.near_earth_objects
-    console.log(resultsObj)
-    for (let day in resultsObj){
-    days.push(resultsObj[day]);
+function appendData(attr, id, a, b){
+    let row = document.getElementById(a)
+
+    let data = document.createElement('td');
+    data.className = id;
+    data.value = attr
+    if(b===1){
+        data.textContent = attr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }else if(b===2){
+        data.textContent = attr
+        data.display = "none"
+    }else{
+        data.textContent = attr;
+    }
+
+    row.appendChild(data);
 }
-    days[0].forEach((element)=>{
-        neosData.push(element)
-    })
-    populateTables(neosData);
-    console.log(neosData)
-    // parsePHA(days);
-    // findNearest(days);
-    // findLargest(days);
-    // findBrightest(days);
+
+function appendLink(attr, id, a){
+    let row = document.getElementById(a)
+
+    let data = document.createElement('td');
+    data.className = id;
+    let link = document.createElement("a");
+    link.href = attr
+    link.target = "_blank"
+    link.textContent = attr.split("=")[1]
+    data.appendChild(link)
+    row.appendChild(data)
 }
-
-function populateTables(array){
-    console.log(days[0])
-    array.forEach(item => {
-        let sstr = item.nasa_jpl_url.split("=")[1]
-    // Define item
-    let result = {
-        name: item.name, 
-        id: item.id,
-        date: item.close_approach_data[0].close_approach_date_full, 
-        distance: Number(item.close_approach_data[0].miss_distance.miles).toFixed(2),
-        diameter_in_feet: Number(item.estimated_diameter.feet.estimated_diameter_max).toFixed(2),
-        magnitude: Number(item.absolute_magnitude_h),
-        danger: item.is_potentially_hazardous_asteroid,
-        link: "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr="+sstr
-    }
-    csvData.push(result)
-    // Make Results row
-    let row = document.createElement('tr');
-    row.classList.add("table-primary");
-    resultsEl.appendChild(row);
-
-    function appendData(attr, id, b){
-        let data = document.createElement('td');
-        data.className = id;
-        data.value = attr
-        if(b===1){
-            data.textContent = attr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-        }else{
-            data.textContent = attr;
-        }
-
-        row.appendChild(data);
-    }
-    function appendLink(attr, id){
-        let data = document.createElement('td');
-        data.className = id;
-        let link = document.createElement("a");
-        link.href = attr
-        link.target = "_blank"
-        link.textContent = sstr
-        data.appendChild(link)
-        row.appendChild(data)
-    }
-
-    // Make NEO data elements
-        appendData(result.name, "name")
-        appendData(result.id, "id")
-        appendData(result.date, "date")
-        appendData(result.distance, "distance",1 )
-        appendData(result.diameter_in_feet, "diameter",1)
-        appendData(result.magnitude, "brightness")
-        appendData(result.danger, "pha")
-        appendLink(result.link, "link")
-    });
-    console.log(csvData)
-};
-
-
 
 function removeChildren(element){
     while(element.firstChild){
@@ -121,29 +76,86 @@ function clearTable(){
     days = [];
     csvData = [];
     removeChildren(resultsEl)
-    console.log(days)
 }
 
+//--------------------DATA UTILITIES------------------------------//
+// Parses data into neosData array. Sends array to populateTables
+function deconstruct(data){
+    neosData = []
+    const nasaObj = { ...data }
+    const resultsObj = nasaObj.near_earth_objects
+    console.log(resultsObj)
+    for (let day in resultsObj){
+    days.push(resultsObj[day]);
+}
+    days.forEach((day)=>{
+        day.forEach((element)=>{
+            neosData.push(element)
+        })
+    })
+    // console.log(days)
+    // console.log(neosData)
+    populateTables(neosData);
+}
+
+//Populates DOM with array data, typically from deconstructed API response JSON
+function populateTables(array){
+    array.forEach(item => {
+        let sstr = item.nasa_jpl_url.split("=")[1]
+    // Define item
+    let result = {
+        name: item.name, 
+        id: item.id,
+        date: item.close_approach_data[0].close_approach_date_full, 
+        epoch_date: item.close_approach_data[0].epoch_date_close_approach,
+        distance: Number(item.close_approach_data[0].miss_distance.miles).toFixed(2),
+        diameter_in_feet: Number(item.estimated_diameter.feet.estimated_diameter_max).toFixed(2),
+        magnitude: Number(item.absolute_magnitude_h),
+        danger: item.is_potentially_hazardous_asteroid,
+        link: "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr="+sstr
+    }
+    csvData.push(result)
+
+    // Make Results row
+    let row = document.createElement('tr');
+    row.classList.add("table-primary");
+    row.id = result.id
+    resultsEl.appendChild(row);
+
+    appendData(result.name, "name",result.id)
+    appendData(result.id, "id",result.id)
+    appendData(result.date, "date", result.id)
+    appendData(result.distance, "distance", result.id, 1)
+    appendData(result.diameter_in_feet, "diameter", result.id, 1)
+    appendData(result.magnitude, "brightness", result.id)
+    appendData(result.danger, "pha", result.id)
+    appendLink(result.link, "link", result.id)
+    });
+};
+
+
+//--------------------------API Call to NASA----------------------------//
 function searchNeoByDate(){
     const start = {
         year: yearInput.value,
         month: monthInput.value,
         day: dayInput.value
     };
-    const end = {
-        span: spanInput.value
-    };
-    let end_span = parseInt(end.span, 10)
+    const span = spanInput.value
+    if(span>7){
+        window.alert("Please limit your search to 7 days or fewer")
+        return
+    }
+
+    let end_span = parseInt(span, 10)
     let start_day = parseInt(start.day,10)
     let end_day = end_span+start_day-1
     date = new Date(start.year, start.month, start.day)
 
     if(Number(search_date) === Number(date)&&resultsEl.children.length>0){
         console.log("same date")
-        console.log(resultsEl.children.length)
         return
     }else{
-        console.log(resultsEl.children.length)
         clearTable();
         search_date = date
         
@@ -164,6 +176,7 @@ function searchNeoByDate(){
     }
 }
 
+//----------------------SORT FUNCTIONS-------------------------------//
 let i = 2;
 function sortTable(array){
     i++
@@ -173,7 +186,6 @@ function sortTable(array){
 }
 
 function clickSort(num){
-    console.log(i)
     let values = []
 
     const rows = document.querySelectorAll("tr.table-primary")
@@ -194,6 +206,35 @@ function clickSort(num){
     sortTable(values)
 }
 
+function csvSort(){
+    if(csvData.length>0){
+        if(i%2===0){
+        csvData.sort((a,b)=>a.epoch_date-b.epoch_date)
+        }else{
+            csvData.sort((a,b)=>b.epoch_date-a.epoch_date)
+        }
+    }
+    i++
+
+    removeChildren(resultsEl)
+    csvData.forEach((element)=>{
+        let row = document.createElement('tr');
+        row.classList.add("table-primary");
+        row.id = element.id
+        resultsEl.appendChild(row);
+    
+        appendData(element.name, "name",element.id)
+        appendData(element.id, "id",element.id)
+        appendData(element.date, "date", element.id)
+        appendData(element.distance, "distance", element.id, 1)
+        appendData(element.diameter_in_feet, "diameter", element.id, 1)
+        appendData(element.magnitude, "brightness", element.id)
+        appendData(element.danger, "pha", element.id)
+        appendLink(element.link, "link", element.id)
+    })
+}
+
+//----------------------Event Listeners---------------------------//
 searchBtn.addEventListener('click', function(event){
     event.preventDefault();
     searchNeoByDate();
@@ -216,7 +257,7 @@ clearBtn.addEventListener('click', function(event){
 })
 
 dateHeader.addEventListener('click', function(){
-    clickSort(2)
+    csvSort()
 })
 
 distanceHeader.addEventListener('click', function(){
@@ -230,62 +271,3 @@ diameterHeader.addEventListener('click', function(){
 magnitudeHeader.addEventListener('click', function(){
     clickSort(5)
 })
-
-// let PHA = [];
-// let nearestObj = [];
-// let largestObj = [];
-// let absolMagnitude = [];
-
-// function findBrightest(array){
-//     array.forEach(element => {
-//         element.forEach(item =>{
-//         if (absolMagnitude.length === 0){
-//             absolMagnitude.push(item)
-//     }else if(item.absolute_magnitude_h < absolMagnitude[0]){
-//         absolMagnitude.pop();
-//         absolMagnitude.push(item)
-//     }
-// })
-// })
-//     console.log("brightest: ",absolMagnitude)
-// }
-
-// function findLargest(array){
-//     array.forEach(element => {
-//         element.forEach(item =>{
-//         if (largestObj.length === 0){
-//             largestObj.push(item)
-//     }else if(item.estimated_diameter.miles.estimated_diameter_max > largestObj[0]){
-//         largestObj.pop();
-//         largestObj.push(item)
-//     }
-// })
-// })
-//     console.log("Largest: ",largestObj)
-// }
-
-// function findNearest(array){
-//     array.forEach(element => {
-//         element.forEach(item =>{
-//         if (nearestObj.length === 0){
-//             nearestObj.push(item)
-//     }else if(item.close_approach_data[0].miss_distance.miles < nearestObj[0]){
-//         nearestObj.pop();
-//         nearestObj.push(item)
-//     }
-// })
-// })
-//     console.log("Nearest: ",nearestObj)
-// }
-
-
-// function parsePHA(array){
-//     array.forEach(element=> {
-//         element.forEach(element => {
-//             if(element.is_potentially_hazardous_asteroid === true){
-//                 PHA.push(element)
-//             }
-//         })
-//     })
-//     neosData.push(PHA);
-// }
