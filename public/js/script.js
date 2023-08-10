@@ -1,12 +1,8 @@
 import { download, csvMaker } from "./downloadCSV.js"
-import 'dotenv/config'
-import errorReporter from './errorReporter.mjs'
-
-errorReporter.report(new Error('documented example'))
 
 console.log('hello world')
 const baseURL = 'https://api.nasa.gov/neo/rest/v1/'
-const apiKEY = process.env.API_KEY
+const apiKEY = 'sFL0Yt0KzZft79bJZ8wpDcy2Wr8t27v6TggLHaIz'
 const searchBtn = document.getElementById('search')
 const clearBtn = document.getElementById('clear');
 const downloadBtn = document.getElementById('download')
@@ -165,12 +161,12 @@ function searchNeoByDate(){
         const end_date = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
         
         var dateQueryURL = `feed?start_date=${start_date}&end_date=${end_date}&api_key=${apiKEY}`
-        fetch(baseURL+dateQueryURL)
+        fetch(baseURL + dateQueryURL)
         .then(function(response){
-            return response.json();
+            return response.json()
         })
         .then(function(data){
-            deconstruct(data);
+            deconstruct(data)
         })
     }
 }
