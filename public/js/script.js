@@ -191,7 +191,7 @@ function clickSort(num){
     let values = []
 
     const rows = document.querySelectorAll("tr.table-primary")
-
+    console.log(rows)
     rows.forEach((element)=>{
         element.value = Number(element.childNodes[num].value)
         values.push(element)
@@ -223,6 +223,7 @@ function csvSort(){
         let row = document.createElement('tr');
         row.classList.add("table-primary");
         row.id = element.id
+        row.insertCell(0).innerHTML=`<input type="checkbox" class="form-check" data-id="${element.id}">`;
         resultsEl.appendChild(row);
     
         appendData(element.name, "name",element.id)
@@ -249,7 +250,8 @@ searchBtn.addEventListener('click', function(event){
     searchNeoByDate();
     clearBtn.style.display = 'inline'
     downloadBtn.style.display = 'inline'
-    saveBtn.style.display = 'inline'
+    if(saveBtn){
+    saveBtn.style.display = 'inline'}
 })
 
 downloadBtn.addEventListener('click', function(){
@@ -264,8 +266,10 @@ clearBtn.addEventListener('click', function(event){
     downloadBtn.removeChild(downloadBtn.firstElementChild)}
     clearBtn.style.display = 'none'
     downloadBtn.style.display = 'none'
+    saveBtn.style.display = 'none'
 })
 
+if(saveBtn){
 saveBtn.addEventListener('click', function(event){
     event.preventDefault();
     // console.log('save')
@@ -281,7 +285,7 @@ saveBtn.addEventListener('click', function(event){
     const filteredNeos = neosData.filter(record => selectedRecordIds.includes(Number(record.id)))
 
     console.log(filteredNeos)
-})
+})}
 
 dateHeader.addEventListener('click', function(){
     getChecked()
@@ -289,13 +293,13 @@ dateHeader.addEventListener('click', function(){
 })
 
 distanceHeader.addEventListener('click', function(){
-    clickSort(3)
-})
-
-diameterHeader.addEventListener('click', function(){
     clickSort(4)
 })
 
-magnitudeHeader.addEventListener('click', function(){
+diameterHeader.addEventListener('click', function(){
     clickSort(5)
+})
+
+magnitudeHeader.addEventListener('click', function(){
+    clickSort(6)
 })
