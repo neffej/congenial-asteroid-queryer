@@ -1,7 +1,11 @@
 const router = require('express').Router();
-const { NEOs } = require('../../models/objects/NEOs');
+const { NEOs, Users, Favorites } = require('../../models/index.js');
 require("dotenv").config();
+const sequelize = require('../../config/connection')
+const session = require("express-session")
+const SequelizeStore = require('connect-session-sequelize')(session.Store)
 
+// @/api/neo
 router.get('/', async(req,res)=> {
     try{
         const neoData = await NEOs.findAll()
@@ -11,27 +15,29 @@ router.get('/', async(req,res)=> {
     }
 });
 
-// @/api/neo/search
-// router.get('/search', async(req, res)=>{
-//     try {
-//         const key = process.env.API_KEY
-//         const { start_date, end_date } = req.query
+// @/api/neo/
+router.post('/', async(req, res)=> {
+    try {
+        const userId = req.session.user_id
+        console.log(userId)
 
-//         var baseURL = 'https://api.nasa.gov/neo/rest/v1/'
-//         var dateQueryURL = `feed?start_date=${start_date}&end_date=${end_date}&api_key=${key}`
-//         fetch(baseURL + dateQueryURL)
-//         .then(function(response){
-//             console.log(response)
-//             return response.json()
-//         })
-//         .then(function(data){
-//             console.log(data)
-//             res.send(data)
-//         })
+        const { data }  = req.body
+        // console.log(data)
 
-//     } catch (error) {
-//         res.status(400).json({ Message: "something went wrong" })
-//     }
-// })
+        const newNEO = await NEOs.create({
+            data: data
+        })
+
+        const newFavorite = await Favorites.create({
+            user_id: userId,
+            neo_id: newNEO.id
+        })
+
+        res.status(200).json({ message: "NEO Saved"})
+    } catch (error) {
+        res.status(400).json(error)
+    }
+})
+
 
 module.exports = router;

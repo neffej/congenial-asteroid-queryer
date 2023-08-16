@@ -93,7 +93,7 @@ router.post('/login', async(req,res)=>{
                 console.log("correct pw")
             req.session.loggedIn = true
             req.session.user_id = userExists.id
-            console.log(req.session)
+            console.log(req.session.user_id)
             res.status(200).json({ message: "Valid Login" })
         }
         }else{

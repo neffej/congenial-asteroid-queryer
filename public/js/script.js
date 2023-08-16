@@ -284,7 +284,21 @@ saveBtn.addEventListener('click', function(event){
 
     const filteredNeos = neosData.filter(record => selectedRecordIds.includes(Number(record.id)))
 
-    console.log(filteredNeos)
+    fetch("/api/neo",{
+        method: "POST",
+        body: JSON.stringify({
+            data: filteredNeos[0]
+        }),
+        headers: {
+            "Content-Type": "application/json",
+        },
+    }).then((res)=>{
+        if(res.ok){
+        console.log("Object Saved")
+     }else{
+            console.log("DB error")
+        }
+    });
 })}
 
 dateHeader.addEventListener('click', function(){
