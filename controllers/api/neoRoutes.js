@@ -21,18 +21,18 @@ router.post('/', async(req, res)=> {
         const userId = req.session.user_id
         console.log(userId)
 
-        const { data }  = req.body
-        // console.log(data)
+        const { records }  = req.body
+        console.log(records)
 
+        for(const record of records){
         const newNEO = await NEOs.create({
-            data: data
+            data: record
         })
-
         const newFavorite = await Favorites.create({
             user_id: userId,
             neo_id: newNEO.id
         })
-
+    }
         res.status(200).json({ message: "NEO Saved"})
     } catch (error) {
         res.status(400).json(error)
