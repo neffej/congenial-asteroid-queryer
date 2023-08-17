@@ -19,11 +19,13 @@ router.get('/', async(req,res)=> {
             const { neo_id } = favorite.dataValues
             const neo = await NEOs.findByPk(neo_id)
             const { data } = neo.dataValues
+            data.close_approach_data = data.close_approach_data[0]
             neoData.push(data)
         }
-        console.log(neoData)
-
-        res.render("neoDisplay", { neoData });
+        res.render("neoDisplay", { 
+            neoData,
+            loggedIn: req.session.loggedIn,
+            userId: req.session.user_id });
     }catch(err){
         res.status(400).json(err)
     }
