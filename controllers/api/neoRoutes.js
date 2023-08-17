@@ -8,8 +8,22 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store)
 // @/api/neo
 router.get('/', async(req,res)=> {
     try{
-        const neoData = await NEOs.findAll()
-        res.status(200).json(neoData);
+        const userId = req.session.user_id
+        const favorites = await Favorites.findAll({
+            where: { user_id: userId},
+            attributes: ['neo_id']
+        })
+        // console.log(favorites)
+        const neoData = []
+        for(const favorite of favorites){
+            const { neo_id } = favorite.dataValues
+            const neo = await NEOs.findByPk(neo_id)
+            const { data } = neo.dataValues
+            neoData.push(data)
+        }
+        console.log(neoData)
+
+        res.render("neoDisplay", { neoData });
     }catch(err){
         res.status(400).json(err)
     }

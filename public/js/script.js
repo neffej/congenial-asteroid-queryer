@@ -28,7 +28,10 @@ let days = [];
 let neosData = [];
 let csvData = [];
 
+
 //-----------------------FUNCTIONS-------------------------------//
+
+
 //-----------------------HTML UTILITIES--------------------------//
 //These utilities add and remove elements from the DOM. They are used by the other functions to display API data and to sort and manage the table display.
 
@@ -74,6 +77,7 @@ function clearTable(){
     csvData = [];
     removeChildren(resultsEl)
 }
+
 
 //--------------------DATA UTILITIES------------------------------//
 // Parses data into neosData array. Sends array to populateTables
@@ -179,6 +183,7 @@ function searchNeoByDate(){
     }
 }
 
+
 //----------------------SORT FUNCTIONS-------------------------------//
 let i = 2;
 function sortTable(array){
@@ -239,12 +244,6 @@ function csvSort(){
 }
 
 
-function getChecked(){
-
-        console.log(resultsEl.children)
-
-}
-
 //----------------------Event Listeners---------------------------//
 searchBtn.addEventListener('click', function(event){
     event.preventDefault();
@@ -278,7 +277,6 @@ saveResults(neosData)
 })}
 
 dateHeader.addEventListener('click', function(){
-    getChecked()
     csvSort()
 })
 
