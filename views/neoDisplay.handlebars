@@ -11,40 +11,40 @@
         <li>ID: {{this.id}}</li>
         <li>JPL Link: {{this.nasa_jpl_url}}</li>
         <li>Absolute Magnitude: {{this.absolute_magnitude_h}}</li>
-        <li>Estimated Diameter
-            <ul> Feet:
-            <li>Min: {{this.estimated_diameter.feet.estimated_diameter_min}}</li>
-            <li>Max: {{this.estimated_diameter.feet.estimated_diameter_max}}</li>
-            </ul>
-            <ul> Miles:
-            <li>Min: {{this.estimated_diameter.miles.estimated_diameter_min}}</li>
-            <li>Max: {{this.estimated_diameter.miles.estimated_diameter_max}}</li>
-            </ul>
-            <ul> Meters:
-            <li>Min: {{this.estimated_diameter.meters.estimated_diameter_min}}</li>
-            <li>Max: {{this.estimated_diameter.meters.estimated_diameter_max}}</li>
-            </ul>
-            <ul> Kilometers:
-            <li>Min: {{this.estimated_diameter.kilometers.estimated_diameter_min}}</li>
-            <li>Max: {{this.estimated_diameter.kilometers.estimated_diameter_max}}</li>
-            </ul>
-        </li>
-        <li>Close Approach Data
+        <ol>Estimated Diameter
+            <li> Feet:
+            <p>Min: {{this.estimated_diameter.feet.estimated_diameter_min}}</p>
+            <p>Max: {{this.estimated_diameter.feet.estimated_diameter_max}}</p>
+            </li>
+            <li> Miles:
+            <p>Min: {{this.estimated_diameter.miles.estimated_diameter_min}}</p>
+            <p>Max: {{this.estimated_diameter.miles.estimated_diameter_max}}</p>
+            </li>
+            <li> Meters:
+            <p>Min: {{this.estimated_diameter.meters.estimated_diameter_min}}</p>
+            <p>Max: {{this.estimated_diameter.meters.estimated_diameter_max}}</p>
+            </li>
+            <li> Kilometers:
+            <p>Min: {{this.estimated_diameter.kilometers.estimated_diameter_min}}</p>
+            <p>Max: {{this.estimated_diameter.kilometers.estimated_diameter_max}}</p>
+            </li>
+        </ol>
+        <ol>Close Approach Data
             <li>Date: {{this.close_approach_data.close_approach_date}}</li>      
             <li>Full Date: {{this.close_approach_data.close_approach_date_full}}</li>      
             <li>Epoch Date: {{this.close_approach_data.epoch_date_close_approach}}</li> 
-            <ul>Relative Velocity
-                <li>Kilometers per second: {{this.close_approach_data.relative_velocity.kilometers_per_second}}</li>
-                <li>Kilometers per hour: {{this.close_approach_data.relative_velocity.kilometers_per_hour}}</li>
-                <li>Miles per hour: {{this.close_approach_data.relative_velocity.miles_per_hour}}</li>
-            </ul>     
-            <ul>Miss Distance
-                <li>Kilometers: {{this.close_approach_data.miss_distance.kilometers}}</li>
-                <li>Miles: {{this.close_approach_data.miss_distance.miles}}</li>
-                <li>Lunar: {{this.close_approach_data.miss_distance.lunar}}</li>
-                <li>Astronomical: {{this.close_approach_data.miss_distance.astrnnomical}}</li>
-            </ul>       
-        </li>
+            <li>Relative Velocity
+                <p>Kilometers per second: {{this.close_approach_data.relative_velocity.kilometers_per_second}}</p>
+                <p>Kilometers per hour: {{this.close_approach_data.relative_velocity.kilometers_per_hour}}</p>
+                <p>Miles per hour: {{this.close_approach_data.relative_velocity.miles_per_hour}}</p>
+            </li>     
+            <li>Miss Distance
+                <p>Kilometers: {{this.close_approach_data.miss_distance.kilometers}}</p>
+                <p>Miles: {{this.close_approach_data.miss_distance.miles}}</p>
+                <p>Lunar: {{this.close_approach_data.miss_distance.lunar}}</p>
+                <p>Astronomical: {{this.close_approach_data.miss_distance.astrnnomical}}</p>
+            </li>       
+        </ol>
         <li>Orbiting Body: {{this.close_approach_data.orbiting_body}}</li>
         <li>Is this a sentry object?  {{this.is_sentry_object}}</li>
         <li>Is this a potentially hazardous object? {{this.is_potentially_hazardous_asteroid}}</li>
