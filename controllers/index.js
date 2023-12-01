@@ -7,7 +7,8 @@ router.get('/', async(req, res) => {
     console.log("Hello!")
     res.render("homepage", {
         loggedIn: req.session.loggedIn,
-        userId: req.session.user_id
+        userId: req.session.user_id,
+        apiKEY: process.env.API_KEY
     })
 });
 

@@ -1,9 +1,8 @@
 import { download, csvMaker } from "./downloadCSV.js"
 import { saveResults } from "./saveResult.js"
 
-console.log('hello world')
 const baseURL = 'https://api.nasa.gov/neo/rest/v1/'
-const apiKEY = 'sFL0Yt0KzZft79bJZ8wpDcy2Wr8t27v6TggLHaIz'
+//const apiKEY = process.env.API_KEY
 const searchBtn = document.getElementById('search')
 const clearBtn = document.getElementById('clear');
 const downloadBtn = document.getElementById('download')
@@ -145,7 +144,7 @@ function populateTables(array){
 function searchNeoByDate(){
     const start = {
         year: yearInput.value,
-        month: monthInput.value,
+        month: monthInput.value-1,
         day: dayInput.value
     };
     const span = spanInput.value
@@ -173,6 +172,7 @@ function searchNeoByDate(){
         const end_date = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
         
         var dateQueryURL = `feed?start_date=${start_date}&end_date=${end_date}&api_key=${apiKEY}`
+        console.log(dateQueryURL)
         fetch(baseURL + dateQueryURL)
         .then(function(response){
             return response.json()

@@ -26,7 +26,9 @@ function submitForm(){
         },
     }).then((res)=>{
         if(res.ok){
-        document.location.replace("/") 
+        document.location.replace("/").catch((error)=>{
+            console.error("Error during fetch: ", error)
+        }) 
      }else{
             if (document.querySelector(".bad-login")) {
 				document.querySelector(".bad-login").remove();

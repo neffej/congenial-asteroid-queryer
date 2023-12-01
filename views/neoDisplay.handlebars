@@ -1,12 +1,12 @@
 <div class="accordion accordion-flush col-6" id="accordionFlush">
     {{#each neoData}}
 <div class="accordion-item">
-    <h2 class="accordion-header">
+    <h2 class="accordion-header" id="heading-{{this.id}}">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{this.id}}" aria-expanded="false" aria-controls={{this.id}}>
         {{this.name}}
       </button>
     </h2>
-      <div id={{this.id}} class="accordion-collapse collapse" data-bs-parent="#accordionFlush">
+      <div id={{this.id}} class="accordion-collapse collapse" aria-labelledby="heading-{{this.id}}" data-bs-parent="#accordionFlush">
       <div class="accordion-body">
         <li>ID: {{this.id}}</li>
         <li>JPL Link: {{this.nasa_jpl_url}}</li>
