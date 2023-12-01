@@ -50,7 +50,7 @@ router.post('/register', async(req,res)=>{
             console.log("Unique email!")
     }
 
-    let user = Users.create({
+    const user = await Users.create({
         first_name: first_name,
         last_name: last_name,
         username: username,
@@ -59,14 +59,18 @@ router.post('/register', async(req,res)=>{
     })
         if(user){
             req.session.loggedIn = true
-            res.status(201).json({
-                id: user.id,
-                first_name: user.first_name,
-                last_name: user.last_name,
-                username: user.username,
-                email: user.email,
-                password: user.password
-            })
+            req.session.userId = user.id
+            req.session.save(() => {
+                console.log(`Session ID: ${req.session.userId}`);
+                res.json({
+                  id: user.id,
+                  first_name: user.first_name,
+                  last_name: user.last_name,
+                  username: user.username,
+                  email: user.email,
+                  password: user.password,
+                });
+              });
         }else{
             res.status(400)
             throw new Error ("Invalid user data")
